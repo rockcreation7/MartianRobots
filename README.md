@@ -19,5 +19,5 @@ or
 2. go run main.go
 
 
-// to do
+To do:
 1. Refactor Handler
