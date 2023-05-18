@@ -18,7 +18,7 @@ func Test_Robot(t *testing.T) {
 	robot.Left()
 
 	if robot.Direction != West {
-		t.Errorf("Robot turn left have problem ")
+		t.Error("Robot turn left have problem ")
 	}
 	fmt.Println(EnumToDirection[robot.Direction])
 
@@ -27,7 +27,7 @@ func Test_Robot(t *testing.T) {
 	robot.Right()
 
 	if robot.Direction != South {
-		t.Errorf("Robot turn Right have problem ")
+		t.Error("Robot turn Right have problem ")
 	}
 	fmt.Println(EnumToDirection[robot.Direction])
 
@@ -38,7 +38,7 @@ func Test_Robot(t *testing.T) {
 	robot.Forward()
 
 	if robot.Y != 2 {
-		t.Errorf(fmt.Sprintf("Robot Forward have problem X: %d Y: %d", robot.X, robot.Y))
+		t.Errorf("Robot Forward have problem X: %d Y: %d", robot.X, robot.Y)
 	}
 
 }
