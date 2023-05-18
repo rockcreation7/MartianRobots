@@ -17,7 +17,8 @@ func Test_Robot_Lost(t *testing.T) {
 		UpperRightY: 10,
 		Scent:       map[string][]int16{},
 	}
-	if !robot.Forward(mars) {
+	robot.Forward(mars)
+	if !robot.IsLost {
 		t.Error("Some issue on bound calculate - Robot")
 	} else {
 		fmt.Println("Robot Lost!")
@@ -28,8 +29,8 @@ func Test_Robot_Lost(t *testing.T) {
 		Y:         10,
 		Direction: East,
 	}
-
-	if robot2.Forward(mars) && robot2.Y == 10 {
+	robot2.Forward(mars)
+	if robot2.IsLost && robot2.Y == 10 {
 		fmt.Println("Robot2 Scent! No Move!")
 	} else {
 		t.Error("Some issue on bound calculate - Robot2")
@@ -38,7 +39,8 @@ func Test_Robot_Lost(t *testing.T) {
 	// test corner case
 	robot.Left()
 	fmt.Println(" Corner : ", EnumToDirection[robot.Direction])
-	if robot2.Forward(mars) && robot2.Y == 10 {
+	robot2.Forward(mars)
+	if robot2.IsLost && robot2.Y == 10 {
 		fmt.Println("Robot2 Corner Scent! No Move!")
 	} else {
 		t.Error("Some issue on bound calculate - Robot2 Corner Case")

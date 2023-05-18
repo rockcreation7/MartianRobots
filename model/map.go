@@ -22,7 +22,7 @@ type Mars struct {
 }
 
 func (mars *Mars) isOutBound(robot *Robot) (out bool) {
-	posKey := fmt.Sprintf("%d%d", robot.prevX, robot.prevY)
+	posKey := fmt.Sprintf("%d%d", robot.PrevX, robot.PrevY)
 
 	if robot.X < 0 || (robot.X == 0 && robot.Y < 0) {
 		mars.Scent[posKey] = append(mars.Scent[posKey], robot.Direction)

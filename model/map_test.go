@@ -14,8 +14,8 @@ func Test_Map(t *testing.T) {
 	robot := &Robot{
 		X:         -1,
 		Y:         0,
-		prevX:     0,
-		prevY:     0,
+		PrevX:     0,
+		PrevY:     0,
 		Direction: South,
 	}
 

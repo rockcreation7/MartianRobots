@@ -2,7 +2,7 @@ package model
 
 type Command struct {
 	UpperRightCorner [2]int16
-	IntructionList   []RobotIntruction
+	IntructionList   []*RobotIntruction
 }
 
 type RobotIntruction struct {

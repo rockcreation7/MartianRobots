@@ -13,8 +13,9 @@ const (
 
 type Robot struct {
 	X, Y         int16
-	prevX, prevY int16
+	PrevX, PrevY int16
 	Direction    int16
+	IsLost       bool
 }
 
 func (robot *Robot) Left() {
@@ -33,10 +34,10 @@ func (robot *Robot) Right() {
 	robot.Direction = robot.Direction + 1
 }
 
-func (robot *Robot) Forward(mars *Mars) (lost bool) {
+func (robot *Robot) Forward(mars *Mars) {
 
 	//Stop when scent on lost direction
-	posKey := fmt.Sprintf("%d%d", robot.X, robot.prevY)
+	posKey := fmt.Sprintf("%d%d", robot.X, robot.PrevY)
 	noMove := false
 	for _, scent := range mars.Scent[posKey] {
 		if scent == robot.Direction {
@@ -49,8 +50,8 @@ func (robot *Robot) Forward(mars *Mars) (lost bool) {
 	}
 
 	// Save current location
-	robot.prevX = robot.X
-	robot.prevY = robot.Y
+	robot.PrevX = robot.X
+	robot.PrevY = robot.Y
 
 	// Command execution
 	switch robot.Direction {
@@ -66,7 +67,7 @@ func (robot *Robot) Forward(mars *Mars) (lost bool) {
 
 	// If it is lost
 	if mars.isOutBound(robot) {
-		lost = true
+		robot.IsLost = true
 	}
 	return
 }
