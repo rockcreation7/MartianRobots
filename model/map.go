@@ -10,7 +10,7 @@ type Mars struct {
 func (mars *Mars) isOutBound(robot *Robot) (out bool) {
 
 	if robot.X < 0 || robot.Y < 0 || robot.X > mars.UpperRightX || robot.Y > mars.UpperRightY {
-		posKey := fmt.Sprintf("%d%d", robot.X, robot.Y)
+		posKey := fmt.Sprintf("%d%d", robot.prevX, robot.prevY)
 		mars.Scent[posKey] = robot.Direction
 		out = true
 		return

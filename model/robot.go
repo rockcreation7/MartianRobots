@@ -8,8 +8,9 @@ const (
 )
 
 type Robot struct {
-	X, Y      int16
-	Direction int16
+	X, Y         int16
+	prevX, prevY int16
+	Direction    int16
 }
 
 var DirectionToEnum = map[string]int16{
@@ -43,6 +44,9 @@ func (robot *Robot) Right() {
 }
 
 func (robot *Robot) Forward(mars *Mars) (lost bool) {
+
+	robot.prevX = robot.X
+	robot.prevY = robot.Y
 
 	switch robot.Direction {
 	case North:
