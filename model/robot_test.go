@@ -33,11 +33,12 @@ func Test_Robot(t *testing.T) {
 
 	robot.Left()
 	robot.Left()
+	fmt.Println(EnumToDirection[robot.Direction])
 	robot.Forward()
 	robot.Forward()
 
-	if robot.Y == 2 {
-		t.Errorf("Robot Forward have problem ")
+	if robot.Y != 2 {
+		t.Errorf(fmt.Sprintf("Robot Forward have problem X: %d Y: %d", robot.X, robot.Y))
 	}
 
 }
