@@ -14,7 +14,7 @@ import (
 
 func main() {
 	command := &model.Command{
-		UpperRightCorner: [2]int16{5, 3},
+		/* UpperRightCorner: [2]int16{5, 3},
 		IntructionList: []*model.RobotIntruction{
 			{
 				RobotPoint:     [2]int16{1, 1},
@@ -31,9 +31,9 @@ func main() {
 				RobotDirection: "W",
 				Intruction:     "LLFFFLFLFL",
 			},
-		},
+		}, */
 	}
-
+	err := Readtxt(command)
 	mars := &model.Mars{
 		UpperRightX: command.UpperRightCorner[0],
 		UpperRightY: command.UpperRightCorner[1],
@@ -42,27 +42,26 @@ func main() {
 
 	handler.Execute(command, mars)
 
-	err := readtxt()
 	if err != nil {
 		fmt.Println(err.Error())
 	}
 }
 
-func readtxt() error {
+func Readtxt(cmd *model.Command) error {
 	data, err := ioutil.ReadFile("command.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	cmd := model.Command{}
 	lines := strings.Split(string(data), "\n")
 	for i, line := range lines {
 		fmt.Println(line, i)
 		if i == 0 {
 			str := strings.Split(line, " ")
 			if len(str) != 2 {
-				return errors.New(fmt.Sprintf("Read Error line: %d", i))
+				return errors.New(fmt.Sprintf("Read Error line: %d %d", i, len(str)))
 			}
+
 			i1, err := strconv.Atoi(str[0])
 			if err != nil {
 				return err
@@ -73,6 +72,33 @@ func readtxt() error {
 				return err
 			}
 			cmd.UpperRightCorner = [2]int16{int16(i1), int16(i2)}
+			cmd.IntructionList = append(cmd.IntructionList, &model.RobotIntruction{})
+			continue
+		}
+		if cmd.IntructionList[len(cmd.IntructionList)-1].RobotPoint == [2]int16{} {
+			str := strings.Split(line, " ")
+
+			if len(str) != 3 {
+				return errors.New(fmt.Sprintf("Read Error line: %d %d", i, len(str)))
+			}
+
+			i1, err := strconv.Atoi(str[0])
+			if err != nil {
+				return err
+			}
+
+			i2, err := strconv.Atoi(str[1])
+			if err != nil {
+				return err
+			}
+			cmd.IntructionList[len(cmd.IntructionList)-1].RobotPoint = [2]int16{int16(i1), int16(i2)}
+			cmd.IntructionList[len(cmd.IntructionList)-1].RobotDirection = str[2]
+			continue
+		} else if cmd.IntructionList[len(cmd.IntructionList)-1].Intruction == "" {
+			cmd.IntructionList[len(cmd.IntructionList)-1].Intruction = line
+			continue
+		} else if len(line) == 0 {
+			cmd.IntructionList = append(cmd.IntructionList, &model.RobotIntruction{})
 		}
 	}
 
