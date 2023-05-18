@@ -12,14 +12,15 @@ func Test_Map(t *testing.T) {
 	robot := &Robot{
 		X:         -1,
 		Y:         0,
+		prevX:     0,
+		prevY:     0,
 		Direction: South,
 	}
 
 	if !mars.isOutBound(robot) {
 		t.Errorf("isOutBound error on robot %d %d", robot.X, robot.Y)
 	}
-
-	if len(mars.Scent) != 1 {
+	if mars.Scent["00"] != South {
 		t.Error("Scent error")
 	}
 }
