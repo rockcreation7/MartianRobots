@@ -2,7 +2,7 @@
 
 How to use:
 
-For (Mac intel)
+For (Mac intel - darwin/amd64)
 
 1. Change the value in txt
 2. ./MartianRobots
