@@ -42,7 +42,7 @@ func (robot *Robot) Right() {
 	robot.Direction = robot.Direction + 1
 }
 
-func (robot *Robot) Forward() {
+func (robot *Robot) Forward(mars *Mars) (lost bool) {
 	switch robot.Direction {
 	case North:
 		robot.Y += 1
@@ -53,4 +53,9 @@ func (robot *Robot) Forward() {
 	case West:
 		robot.X -= 1
 	}
+
+	if mars.isOutBound(robot) {
+		lost = true
+	}
+	return
 }
