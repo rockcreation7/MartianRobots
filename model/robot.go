@@ -19,10 +19,38 @@ var DirectionToEnum = map[string]int16{
 	"W": West,
 }
 
+var EnumToDirection = map[int16]string{
+	North: "N",
+	East:  "E",
+	South: "S",
+	West:  "W",
+}
+
 func (robot *Robot) Left() {
 	if robot.Direction == North {
-		robot.Direction = East
+		robot.Direction = West
 		return
 	}
 	robot.Direction = robot.Direction - 1
+}
+
+func (robot *Robot) Right() {
+	if robot.Direction == West {
+		robot.Direction = North
+		return
+	}
+	robot.Direction = robot.Direction + 1
+}
+
+func (robot *Robot) Forward() {
+	switch robot.Direction {
+	case North:
+		robot.Y += 1
+	case East:
+		robot.X += 1
+	case South:
+		robot.Y -= 1
+	case West:
+		robot.X -= 1
+	}
 }
