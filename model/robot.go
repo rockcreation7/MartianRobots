@@ -1,6 +1,8 @@
 package model
 
-import "fmt"
+import (
+	"fmt"
+)
 
 const (
 	North = iota
@@ -49,7 +51,14 @@ func (robot *Robot) Forward(mars *Mars) (lost bool) {
 
 	//Stop when scent on lost direction
 	posKey := fmt.Sprintf("%d%d", robot.X, robot.prevY)
-	if mars.Scent[posKey] == robot.Direction {
+	noMove := false
+	for _, scent := range mars.Scent[posKey] {
+		if scent == robot.Direction {
+			noMove = true
+			break
+		}
+	}
+	if noMove {
 		return
 	}
 

@@ -7,7 +7,7 @@ func Test_Map(t *testing.T) {
 	mars := &Mars{
 		UpperRightX: 10,
 		UpperRightY: 10,
-		Scent:       map[string]int16{},
+		Scent:       map[string][]int16{},
 	}
 	robot := &Robot{
 		X:         -1,
@@ -20,7 +20,7 @@ func Test_Map(t *testing.T) {
 	if !mars.isOutBound(robot) {
 		t.Errorf("isOutBound error on robot %d %d", robot.X, robot.Y)
 	}
-	if mars.Scent["00"] != South {
+	if len(mars.Scent) > 0 && mars.Scent["00"][0] != South {
 		t.Error("Scent error")
 	}
 }

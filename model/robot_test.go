@@ -15,7 +15,7 @@ func Test_Robot_Lost(t *testing.T) {
 	mars := &Mars{
 		UpperRightX: 10,
 		UpperRightY: 10,
-		Scent:       map[string]int16{},
+		Scent:       map[string][]int16{},
 	}
 	if !robot.Forward(mars) {
 		t.Error("Some issue on bound calculate - Robot")
@@ -61,12 +61,16 @@ func Test_Robot(t *testing.T) {
 		t.Error("Robot turn Right have problem ")
 	}
 	fmt.Println(EnumToDirection[robot.Direction])
-
+	mars := &Mars{
+		UpperRightX: 10,
+		UpperRightY: 10,
+		Scent:       map[string][]int16{},
+	}
 	robot.Left()
 	robot.Left()
 	fmt.Println(EnumToDirection[robot.Direction])
-	robot.Forward(&Mars{})
-	robot.Forward(&Mars{})
+	robot.Forward(mars)
+	robot.Forward(mars)
 
 	if robot.Y != 2 {
 		t.Errorf("Robot Forward have problem X: %d Y: %d", robot.X, robot.Y)
