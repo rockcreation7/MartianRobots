@@ -43,6 +43,7 @@ func (robot *Robot) Right() {
 }
 
 func (robot *Robot) Forward(mars *Mars) (lost bool) {
+
 	switch robot.Direction {
 	case North:
 		robot.Y += 1
