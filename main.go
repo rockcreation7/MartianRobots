@@ -1,6 +1,13 @@
 package main
 
 import (
+	"errors"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"strconv"
+	"strings"
+
 	"github.com/rockcreation7/MartianRobots/handler"
 	"github.com/rockcreation7/MartianRobots/model"
 )
@@ -34,4 +41,40 @@ func main() {
 	}
 
 	handler.Execute(command, mars)
+
+	err := readtxt()
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+}
+
+func readtxt() error {
+	data, err := ioutil.ReadFile("command.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	cmd := model.Command{}
+	lines := strings.Split(string(data), "\n")
+	for i, line := range lines {
+		fmt.Println(line, i)
+		if i == 0 {
+			str := strings.Split(line, " ")
+			if len(str) != 2 {
+				return errors.New(fmt.Sprintf("Read Error line: %d", i))
+			}
+			i1, err := strconv.Atoi(str[0])
+			if err != nil {
+				return err
+			}
+
+			i2, err := strconv.Atoi(str[1])
+			if err != nil {
+				return err
+			}
+			cmd.UpperRightCorner = [2]int16{int16(i1), int16(i2)}
+		}
+	}
+
+	return nil
 }
