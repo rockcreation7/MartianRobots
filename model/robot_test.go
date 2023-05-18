@@ -34,6 +34,15 @@ func Test_Robot_Lost(t *testing.T) {
 	} else {
 		t.Error("Some issue on bound calculate - Robot2")
 	}
+
+	// test corner case
+	robot.Left()
+	fmt.Println(" Corner : ", EnumToDirection[robot.Direction])
+	if robot2.Forward(mars) && robot2.Y == 10 {
+		fmt.Println("Robot2 Corner Scent! No Move!")
+	} else {
+		t.Error("Some issue on bound calculate - Robot2 Corner Case")
+	}
 }
 
 // go test -run Test_Robot -v

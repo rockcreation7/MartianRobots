@@ -1,6 +1,8 @@
 package model
 
-import "testing"
+import (
+	"testing"
+)
 
 // go test -run Test_Map -v
 func Test_Map(t *testing.T) {
@@ -23,4 +25,5 @@ func Test_Map(t *testing.T) {
 	if len(mars.Scent) > 0 && mars.Scent["00"][0] != South {
 		t.Error("Scent error")
 	}
+
 }

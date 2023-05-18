@@ -17,20 +17,6 @@ type Robot struct {
 	Direction    int16
 }
 
-var DirectionToEnum = map[string]int16{
-	"N": North,
-	"E": East,
-	"S": South,
-	"W": West,
-}
-
-var EnumToDirection = map[int16]string{
-	North: "N",
-	East:  "E",
-	South: "S",
-	West:  "W",
-}
-
 func (robot *Robot) Left() {
 	if robot.Direction == North {
 		robot.Direction = West
