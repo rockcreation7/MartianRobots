@@ -1,6 +1,19 @@
 # MartianRobots
 
-how to use:
+How to use:
 
-1. Change the value in main.go
+For (Mac intel)
+
+1. Change the value in txt
+2. ./MartianRobots
+
+or
+
+1. Change the value in txt
+2. go build  
+3. ./MartianRobots
+
+or
+
+1. Change the value in txt
 2. go run main.go
